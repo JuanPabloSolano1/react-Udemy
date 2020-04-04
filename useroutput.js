@@ -4,7 +4,7 @@ export const UserOutput = (props) => {
   return (
     <div>
       <p>Click the Button to Toggle!</p>
-      <button onClick={props.click}>Click Me!</button>
+      <button style={props.style} onClick={props.click}>Click Me!</button>
     </div>
   );
 };

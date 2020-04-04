@@ -49,7 +49,6 @@ changeEntry = (event,id) =>{
  })
 }
 
-
   render(){
     const style ={
       textAlign: "center",
@@ -60,6 +59,11 @@ changeEntry = (event,id) =>{
       paddingBottom:"20px",
       marginTop:"20px"
     }
+    const styleButton = {
+      backgroundColor: "Black",
+      color: "white",
+      
+    }
    
    let check = null
    if(this.state.checkState){
@@ -69,17 +73,18 @@ changeEntry = (event,id) =>{
            return (
              <div style={personStyle}>
              <UserInput key={index} name={element.name} age={element.age}change={this.changeEntry.bind(this,event, element.id)}/>
-             <button onClick={this.deleteEntry.bind(this,index)}>Remove Entry!</button>
+             <button style={styleButton} onClick={this.deleteEntry.bind(this,index)}>Remove Entry!</button>
              </div>
            )
          })}
         </div>
       )
+     styleButton.backgroundColor = "red"
     }
 
     return (
       <div style={style}>
-       <UserOutput click={this.clickToggle}/>
+       <UserOutput style={styleButton} click={this.clickToggle}/>
        {check}
       </div>
     )
