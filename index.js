@@ -62,7 +62,15 @@ changeEntry = (event,id) =>{
     const styleButton = {
       backgroundColor: "Black",
       color: "white",
-      
+
+    }
+
+    let classes = []
+    if(this.state.persons.length <= 2){
+      classes.push("red")
+    }
+    if(this.state.persons.length <= 1){
+      classes.push("bold")
     }
    
    let check = null
@@ -84,7 +92,8 @@ changeEntry = (event,id) =>{
 
     return (
       <div style={style}>
-       <UserOutput style={styleButton} click={this.clickToggle}/>
+      <p className={classes.join(" ")}>Click the Button to Toggle!</p>
+       <UserOutput classNametext={classes.join(" ")} style={styleButton} click={this.clickToggle}/>
        {check}
       </div>
     )
