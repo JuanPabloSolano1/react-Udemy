@@ -2,6 +2,7 @@ import React from "react";
 import { render } from "react-dom";
 import { UserOutput } from "./useroutput";
 import { UserInput } from "./userinput";
+import styled from 'styled-components';
 
 class App extends React.Component {
   constructor(props){
@@ -54,6 +55,12 @@ changeEntry = (event,id) =>{
       textAlign: "center",
     }
 
+    const StyleDiv = styled.div`
+     text-align: center;
+     width: 400px;
+     margin: 0 auto;
+    `
+
     const personStyle ={
       border:"solid",
       paddingBottom:"20px",
@@ -91,11 +98,13 @@ changeEntry = (event,id) =>{
     }
 
     return (
-      <div style={style}>
+      <StyleDiv> 
+      <div>
       <p className={classes.join(" ")}>Click the Button to Toggle!</p>
        <UserOutput classNametext={classes.join(" ")} style={styleButton} click={this.clickToggle}/>
        {check}
       </div>
+      </StyleDiv>
     )
   }
 }
