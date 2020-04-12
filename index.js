@@ -4,17 +4,25 @@ import { UserOutput } from "./useroutput";
 import { UserInput } from "./userinput";
 import styled from 'styled-components';
 
+
+
+ const StyleDiv = styled.div`
+     text-align: center;
+     width: 400px;
+     margin: 0 auto;
+    `
+
 class App extends React.Component {
   constructor(props){
     super(props)
     this.state ={
       persons:[
-      { id: '0', name: 'Max', age: 28 },
-      { id: '1', name: 'Manu', age: 29 },
-      { id: '2', name: 'Stephanie', age: 26 }
-      ]
+      { id: 'asfa1', name: 'Max', age: 28 },
+      { id: 'vasdf1', name: 'Manu', age: 29 },
+      { id: 'asdf11', name: 'Stephanie', age: 26 }
+      ],
+      checkState: false
     }
-    checkState: false
     this.clickToggle = this.clickToggle.bind(this)
     this.deleteEntry = this.deleteEntry.bind(this)
     this.changeEntry = this.changeEntry.bind(this)
@@ -39,27 +47,30 @@ changeEntry = (event,id) =>{
  const personIndex = this.state.persons.findIndex(p =>{
    return p.id === id
  })
- const person = [...this.state.persons]
- person.name = event.target.value
 
- const test = [...this.state.persons]
- test[personIndex] = person
+
+const person = {
+      ...this.state.persons[personIndex]
+};
+console.log(event.target.value)
+ person.name = event.target.value
+ console.log(person)
+
+ const persons = [...this.state.persons]
+ persons[personIndex] = person
 
  this.setState({
-   persons: test
+   persons: persons
  })
 }
 
   render(){
     const style ={
       textAlign: "center",
+      width: "400px",
+      margin: "0 auto"
     }
 
-    const StyleDiv = styled.div`
-     text-align: center;
-     width: 400px;
-     margin: 0 auto;
-    `
 
     const personStyle ={
       border:"solid",
@@ -87,7 +98,7 @@ changeEntry = (event,id) =>{
          {this.state.persons.map((element,index) =>{
            return (
              <div style={personStyle}>
-             <UserInput key={index} name={element.name} age={element.age}change={this.changeEntry.bind(this,event, element.id)}/>
+             <UserInput key={element.id} value={this.state.persons} name={element.name} age={element.age} change={(event) => this.changeEntry(event, element.id)}/>
              <button style={styleButton} onClick={this.deleteEntry.bind(this,index)}>Remove Entry!</button>
              </div>
            )
@@ -98,13 +109,11 @@ changeEntry = (event,id) =>{
     }
 
     return (
-      <StyleDiv> 
-      <div>
+    <StyleDiv>
       <p className={classes.join(" ")}>Click the Button to Toggle!</p>
        <UserOutput classNametext={classes.join(" ")} style={styleButton} click={this.clickToggle}/>
        {check}
-      </div>
-      </StyleDiv>
+    </StyleDiv>
     )
   }
 }
