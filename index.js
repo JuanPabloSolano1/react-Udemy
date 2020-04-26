@@ -22,7 +22,7 @@ class App extends React.Component {
       { id: 'asdf11', name: 'Stephanie', age: 26 }
       ],
       checkState: false,
-      counter: 0 
+      counter: 0
     }
     this.clickToggle = this.clickToggle.bind(this)
     this.deleteEntry = this.deleteEntry.bind(this)
@@ -43,6 +43,7 @@ class App extends React.Component {
       persons: test
     })
   }
+
 
 changeEntry = (event,id) =>{
  const personIndex = this.state.persons.findIndex(p =>{
