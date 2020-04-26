@@ -21,7 +21,8 @@ class App extends React.Component {
       { id: 'vasdf1', name: 'Manu', age: 29 },
       { id: 'asdf11', name: 'Stephanie', age: 26 }
       ],
-      checkState: false
+      checkState: false,
+      counter: 0 
     }
     this.clickToggle = this.clickToggle.bind(this)
     this.deleteEntry = this.deleteEntry.bind(this)
@@ -48,22 +49,22 @@ changeEntry = (event,id) =>{
    return p.id === id
  })
 
-
+console.log(this.state.counter)
 const person = {
       ...this.state.persons[personIndex]
 };
-console.log(event.target.value)
  person.name = event.target.value
- console.log(person)
 
  const persons = [...this.state.persons]
  persons[personIndex] = person
 
- this.setState({
-   persons: persons
- })
+ this.setState((prevState, props) =>{
+   return {
+   persons: persons,
+   counter: prevState.counter + 1
+ }
+})
 }
-
   render(){
     const style ={
       textAlign: "center",
