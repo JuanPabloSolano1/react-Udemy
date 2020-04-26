@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { render } from "react-dom";
 import { UserOutput } from "./useroutput";
 import { UserInput } from "./userinput";
@@ -109,11 +109,13 @@ console.log(event.target.value)
     }
 
     return (
+   <Fragment>   
     <StyleDiv>
       <p className={classes.join(" ")}>Click the Button to Toggle!</p>
        <UserOutput classNametext={classes.join(" ")} style={styleButton} click={this.clickToggle}/>
        {check}
     </StyleDiv>
+    </Fragment>
     )
   }
 }
