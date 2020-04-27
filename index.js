@@ -22,8 +22,10 @@ class App extends React.Component {
       { id: 'asdf11', name: 'Stephanie', age: 26 }
       ],
       checkState: false,
-      counter: 0
+      counter: 0,
+      isLogin: false
     }
+    this.changeLogin = this.changeLogin.bind(this)
     this.clickToggle = this.clickToggle.bind(this)
     this.deleteEntry = this.deleteEntry.bind(this)
     this.changeEntry = this.changeEntry.bind(this)
@@ -44,6 +46,11 @@ class App extends React.Component {
     })
   }
 
+changeLogin = () =>{
+  this.setState({
+    isLogin: true
+  })
+}
 
 changeEntry = (event,id) =>{
  const personIndex = this.state.persons.findIndex(p =>{
@@ -85,6 +92,12 @@ const person = {
 
     }
 
+    const styleLogin = {
+      backgroundColor: "Green",
+      color: "white",
+
+    }
+
     let classes = []
     if(this.state.persons.length <= 2){
       classes.push("red")
@@ -100,6 +113,7 @@ const person = {
          {this.state.persons.map((element,index) =>{
            return (
              <div style={personStyle}>
+             {this.state.isLogin ? <p>Logged in!</p> : <p>Not logged In!</p>}
              <UserInput key={element.id} value={this.state.persons} name={element.name} age={element.age} change={(event) => this.changeEntry(event, element.id)}/>
              <button style={styleButton} onClick={this.deleteEntry.bind(this,index)}>Remove Entry!</button>
              </div>
@@ -114,7 +128,7 @@ const person = {
    <Fragment>   
     <StyleDiv>
       <p className={classes.join(" ")}>Click the Button to Toggle!</p>
-       <UserOutput classNametext={classes.join(" ")} style={styleButton} click={this.clickToggle}/>
+       <UserOutput classNametext={classes.join(" ")} style={styleButton} loginstyle={styleLogin}click={this.clickToggle} login={this.changeLogin}/>
        {check}
     </StyleDiv>
     </Fragment>
