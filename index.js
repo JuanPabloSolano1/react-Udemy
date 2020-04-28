@@ -3,6 +3,7 @@ import { render } from "react-dom";
 import { UserOutput } from "./useroutput";
 import { UserInput } from "./userinput";
 import styled from 'styled-components';
+import authContext from './authContext.js'
 
 
 
@@ -23,13 +24,15 @@ class App extends React.Component {
       ],
       checkState: false,
       counter: 0,
-      isLogin: false
+      authenticated: false
     }
     this.changeLogin = this.changeLogin.bind(this)
     this.clickToggle = this.clickToggle.bind(this)
     this.deleteEntry = this.deleteEntry.bind(this)
     this.changeEntry = this.changeEntry.bind(this)
   }
+  
+  static contextType = authContext
 
   clickToggle = () => {
     const toggle = this.state.checkState
@@ -48,7 +51,7 @@ class App extends React.Component {
 
 changeLogin = () =>{
   this.setState({
-    isLogin: true
+    authenticated: true
   })
 }
 
@@ -113,7 +116,8 @@ const person = {
          {this.state.persons.map((element,index) =>{
            return (
              <div style={personStyle}>
-             {this.state.isLogin ? <p>Logged in!</p> : <p>Not logged In!</p>}
+             {console.log(this.context.authenticated)}
+             {this.state.authenticated ? (<p>Authenticated!</p>) : (<p>Log In!</p>)}
              <UserInput key={element.id} value={this.state.persons} name={element.name} age={element.age} change={(event) => this.changeEntry(event, element.id)}/>
              <button style={styleButton} onClick={this.deleteEntry.bind(this,index)}>Remove Entry!</button>
              </div>
@@ -129,6 +133,7 @@ const person = {
     <StyleDiv>
       <p className={classes.join(" ")}>Click the Button to Toggle!</p>
        <UserOutput classNametext={classes.join(" ")} style={styleButton} loginstyle={styleLogin}click={this.clickToggle} login={this.changeLogin}/>
+       <button style={styleLogin} onClick={this.changeLogin}>Login</button>
        {check}
     </StyleDiv>
     </Fragment>
